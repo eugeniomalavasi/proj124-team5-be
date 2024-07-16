@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 
-
 @section('content')
 
     <div class="container">
@@ -27,44 +26,44 @@
             @csrf
 
             <div class="form-group">
-                <label for="title">Titolo:</label>
+                <label for="title">Titolo:<span class="text-black">*</span></label>
                 <input type="text" class="form-control" id="title" name="title">
             </div>
 
             <div class="form-group">
-                <label for="address">Indirizzo:</label>
+                <label for="address">Indirizzo:<span class="text-black">*</span></label>
                 <input type="text" class="form-control" id="address" name="address">
             </div>
 
             <div class="form-group">
-                <label for="rooms">Stanze:</label>
+                <label for="rooms">Stanze:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="rooms" name="rooms" required>
             </div>
 
             <div class="form-group">
-                <label for="beds">Posti letto:</label>
+                <label for="beds">Posti letto:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="beds" name="beds" required>
             </div>
             <div class="form-group">
-                <label for="bathroom">Bagni:</label>
+                <label for="bathroom">Bagni:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="bathroom" name="bathroom" required>
             </div>
             <div class="form-group">
-                <label for="square_mt">Metri Quadrati:</label>
+                <label for="square_mt">Metri Quadrati:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="square_mt" name="square_mt" required>
             </div>
 
-            <span>Sponsorship:</span>
-            <select class="form-select" name="sponsorship_id" id="sponsorship_id">
-
-                <option value=""></option>
-                @foreach ($sponsorships as $sponsorship)
-                    <option value="{{ $sponsorship->id }}">{{ $sponsorship->type }}</option>
-                @endforeach
-            </select>
+            <div class="form-group">
+                <label for="sponsorship_id">Sponsorship:<span class="text-black">*</span></label>
+                <select class="form-select" name="sponsorship_id" id="sponsorship_id" required>
+                    @foreach ($sponsorships as $sponsorship)
+                        <option value="{{ $sponsorship->id }}">{{ $sponsorship->type }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="description">Descrizione:</label>
                 <textarea class="form-control" id="description" name="description"></textarea>
             </div>
 
@@ -78,15 +77,15 @@
             <div class="mt-2">
                 <span>Servizi offerti:</span>
                 @foreach ($services as $service)
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="services">
-                    <label class="form-check-label" for="services">
-                        {{ $service->title }}
-                    </label>
-                </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="services">
+                        <label class="form-check-label" for="services">
+                            {{ $service->title }}
+                        </label>
+                    </div>
                 @endforeach
             </div>
-            
+
             {{-- <div>
                 <span>Slug:</span>
                 <p class="fw-bold" id="slug"></p>
@@ -98,8 +97,5 @@
         </form>
 
     </div>
-
-
-
 
 @endsection

@@ -1,10 +1,9 @@
 @extends('layouts.admin')
 
-
 @section('content')
 
     <div class="container">
-        <h1 class="mt-4 fw-bold">Aggiungi Appartamento</h1>
+        <h1 class="mt-4 fw-bold">Modifica Appartamento</h1>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -27,39 +26,39 @@
             @csrf
 
             <div class="form-group">
-                <label for="title">Titolo:</label>
+                <label for="title">Titolo:<span class="text-black">*</span></label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $apartment->title) }}">
             </div>
 
             <div class="form-group">
-                <label for="address">Indirizzo:</label>
+                <label for="address">Indirizzo:<span class="text-black">*</span></label>
                 <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $apartment->address) }}">
             </div>
 
             <div class="form-group">
-                <label for="rooms">Stanze:</label>
+                <label for="rooms">Stanze:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="rooms" name="rooms" value="{{ old('rooms', $apartment->rooms) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="beds">Posti letto:</label>
+                <label for="beds">Posti letto:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="beds" name="beds" value="{{ old('beds', $apartment->beds) }}" required>
             </div>
             <div class="form-group">
-                <label for="bathroom">Bagni:</label>
+                <label for="bathroom">Bagni:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="bathroom" name="bathroom" value="{{ old('bathroom', $apartment->bathroom) }}" required>
             </div>
             <div class="form-group">
-                <label for="square_mt">Metri Quadrati:</label>
+                <label for="square_mt">Metri Quadrati:<span class="text-black">*</span></label>
                 <input type="number" class="form-control" id="square_mt" name="square_mt" value="{{ old('square_mt', $apartment->square_mt) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="sponsorship_id">Sponsorship:</label>
-                <select class="form-select" name="sponsorship_id" id="sponsorship_id">
+                <label for="sponsorship_id">Sponsorship:<span class="text-black">*</span></label>
+                <select class="form-select" name="sponsorship_id" id="sponsorship_id" required>
                     <option value=""></option>
                     @foreach ($sponsorships as $sponsorship)
-                        <option value="{{ $sponsorship->id }}" {{ old('sponsorship_id') == $sponsorship->id ? 'selected' : '' }}>
+                        <option value="{{ $sponsorship->id }}" {{ old('sponsorship_id', $apartment->sponsorship_id) == $sponsorship->id ? 'selected' : '' }}>
                             {{ $sponsorship->type }}
                         </option>
                     @endforeach
@@ -67,12 +66,12 @@
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
-                {{-- <textarea class="form-control" id="description" name="description">{{ old('apartment_description', $apartment_description) }}</textarea> --}}
+                <label for="description">Descrizione:</label>
+                <textarea class="form-control" id="description" name="description">{{ old('description', $apartment->description) }}</textarea>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="1" id="available" name="available" {{ old('available') ? 'checked' : '' }}>
+                <input class="form-check-input" type="checkbox" value="1" id="available" name="available" {{ old('available', $apartment->available) ? 'checked' : '' }}>
                 <label class="form-check-label" for="available">
                     Disponibile
                 </label>
@@ -87,7 +86,7 @@
                     @else
                     <input @checked($apartment->services->contains($service)) name="services[]" class="form-check-input" type="checkbox" value="{{ $service->id }}" id="service-{{ $service->id }}">
                     @endif
-                    <label class="form-check-label" for="services">
+                    <label class="form-check-label" for="service-{{ $service->id }}">
                         {{ $service->title }}
                     </label>
                 </div>
@@ -99,18 +98,10 @@
                 <p class="fw-bold" id="slug"></p>
             </div> --}}
 
-            <button type="submit" class="btn btn-primary mt-2">Aggiungi</button>
-<<<<<<< HEAD
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mt-2">Elimina</a>
-=======
+            <button type="submit" class="btn btn-primary mt-2">Modifica</button>
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mt-2">Cancella</a>
->>>>>>> d5bd6403a91d154e19a69ebeff974d060666ed88
-
         </form>
 
     </div>
-
-
-
 
 @endsection
